@@ -7,8 +7,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && apt-get install -y zip unzip software-properties-common nodejs npm \
     && docker-php-ext-install pdo_mysql \
     && a2enmod rewrite headers
-RUN npm install npm@latest -g --silent && \
+RUN npm install npm -g --silent && \
     npm install n -g --silent && \
-    n latest
+    n lts
 CMD ["apache2-foreground"]
 ENTRYPOINT ["/entry.sh"]
