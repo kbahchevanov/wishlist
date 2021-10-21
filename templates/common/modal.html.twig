@@ -1,0 +1,17 @@
+<!-- Button trigger modal -->
+<button id="info-message-btn" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#info-message"></button>
+
+<!-- Modal -->
+<div class="modal fade" id="info-message" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                {% if app.request().get('_route') == 'catalogue' %}
+                    {{ 'page.catalogue.modal-success'|trans|replace({'%wishlistUrl%': path('wishlist')})|raw }}
+                {% else %}
+                    {{ 'page.wishlist.modal-success'|trans }}
+                {% endif%}
+            </div>
+        </div>
+    </div>
+</div>

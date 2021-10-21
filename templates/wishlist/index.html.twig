@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('wishlist') }}
+{% endblock %}
+
+{% block title %}{{ 'page.wishlist.title'|trans }}{% endblock %}
+
+{% block body %}
+
+{% include('common/loader.html.twig') %}
+{% include('common/modal.html.twig') %}
+
+<div class="container py-3">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+
+        <div class="no-results{% if items is not empty %} d-none{% endif %}" >
+            <h4>{{ 'page.wishlist.no-results'|trans|replace({'%catalogUrl%': path('catalogue')})|raw }}</h4>
+        </div>
+
+        {% for item in items %}
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4>{{ item.project }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>{{ item.platform }}</li>
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-outline-primary remove-from-wishlist" data-id="{{ item.id }}">
+                            {{ 'page.wishlist.buttons.remove-from-wishlist'|trans }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
+

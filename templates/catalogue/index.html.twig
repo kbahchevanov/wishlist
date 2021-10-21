@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('catalogue') }}
+{% endblock %}
+
+{% block title %}{{ 'page.catalogue.title'|trans }}{% endblock %}
+
+{% block body %}
+
+{% include('common/loader.html.twig') %}
+{% include('common/modal.html.twig') %}
+
+<div class="container py-3">
+    {% include('catalogue/parts/filters.html.twig') %}
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h3 class="display-6 fw-normal">{{ 'page.catalogue.heading'|trans }}</h3>
+    </div>
+
+    {% include('catalogue/parts/results.html.twig') %}
+    {% include('catalogue/parts/projectInfo.html.twig') %}
+</div>
+{% endblock %}

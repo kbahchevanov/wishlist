@@ -1,0 +1,43 @@
+version: '3'
+networks:
+  abrites_network:
+services:
+  mysql:
+    container_name: mysql_container
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart:
+      always
+    networks:
+      - abrites_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpw
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+  myadmin:
+    container_name: myadmin_container
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    networks:
+      - abrites_network
+    environment:
+      - PMA_HOST=mysql
+  application:
+    container_name: application_container
+    ports:
+      - 1234:80
+    networks:
+      - abrites_network
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    build:
+      context: .
+    working_dir: /var/www/html
+    volumes:
+      - ../:/var/www/html
+      - ./apache/httpd/vhost.conf:/etc/apache2/sites-available/000-default.conf

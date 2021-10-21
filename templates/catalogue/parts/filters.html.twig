@@ -1,0 +1,36 @@
+<form method="post">
+    <div class="form-group">
+        <label for="search"><strong>{{ 'page.catalogue.labels.search'|trans }}</strong></label>
+        <input id="search" class="form-control" type="text" name="search" required minlength="2" />
+    </div>
+    <br />
+
+    <strong>{{ 'page.catalogue.labels.filter-license'|trans }}</strong><br />
+    <div id="licenses" class="form-group">
+    {% for license in ['Apache-2.0', 'GPL', 'MIT', 'ISC', 'UNLICENSED'] %}
+        <div class="form-check form-check-inline">
+            <input id="license-{{ loop.index }}" class="form-check-input" type="checkbox" value="{{ license }}" name="licenses[]">
+            <label class="form-check-label" for="license-{{ loop.index }}">
+                {{ license }}
+            </label>
+        </div>
+    {% endfor %}
+    </div>
+    <br /><br />
+
+    {% if platforms is not empty %}
+        <strong>{{ 'page.catalogue.labels.filter-platform'|trans }}</strong><br />
+        <div id="platforms" class="form-group">
+            {% for platform in platforms %}
+                <div class="form-check form-check-inline">
+                    <input id="platform-{{ loop.index }}" class="form-check-input" type="checkbox" value="{{ platform.name }}" name="platforms[]">
+                    <label class="form-check-label" for="platform-{{ loop.index }}">
+                        {{ platform.name }}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <br /><br />
+</form>

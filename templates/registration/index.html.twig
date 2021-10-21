@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registration Form{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Register</h1>
+
+        {% set formErrors = registrationForm.vars.errors.form.getErrors(true) %}
+        {% if formErrors|length %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in formErrors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {# Render the Form #}
+        {{ form_start(registrationForm, {attr: {novalidate: 'novalidate'}}) }}
+        <div class="form-group">
+            {{ form_row(registrationForm.email) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.plainPassword) }}
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

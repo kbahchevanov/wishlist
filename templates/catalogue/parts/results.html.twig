@@ -1,0 +1,67 @@
+<div id="results" class="text-center">
+    <div class="row row-cols-1 row-cols-md-3 mb-3">
+        {% if projects is empty %}
+        <div class="no-results">
+            <h4>{{ 'page.catalogue.no-results'|trans }}</h4>
+        </div>
+        {% else %}
+            {% for project in projects %}
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4>{{ project.name }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>{{ project.platform }}</li>
+                                <li>
+                                    <a target="_blank" href="{{ project.homepage }}" title="{{ project.name }}">
+                                        {{ project.repository_url }}
+                                    </a>
+                                </li>
+                                <li>{{ project.language }}</li>
+                                <li>{{ project.latest_release_published_at|date("d-m-Y H:i:s") }}</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-lg btn-outline-primary add-to-wishlist"{% if project.name in userWishItems %} disabled{% endif %}>
+                                {{ 'page.catalogue.buttons.add-to-wishlist'|trans }}
+                            </button>
+                            <button type="button" class="w-100 mt-2 btn btn-secondary" data-bs-toggle="modal" data-bs-target="#more-info-{{ loop.index }}">
+                                {{ 'page.catalogue.more-info'|trans }}
+                            </button>
+                            <div class="modal fade" id="more-info-{{ loop.index }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            {% if project.description is not empty %}<b>Description</b>: {{ project.description }}<br />{% endif %}
+                                            {% if project.keywords is not empty %}<b>Keywords</b>: {{ project.keywords|join(',') }}<br />{% endif %}
+                                            {% if project.licenses is not empty %}<b>Licenses</b>: {{ project.licenses }}<br />{% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="clearfix"></div>
+    {% if projects is not empty and projects|length >= 10 %}
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if page ?? false and page > 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:;" data-page="{{ page - 1 }}">{{ 'general.pagination.previous-page'|trans }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:;" data-page="{{ (page ?? false) ? page + 1 : 2 }}">{{ 'general.pagination.next-page'|trans }}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    {% endif %}
+</div>
+
+

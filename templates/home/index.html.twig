@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'page.home.title'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container py-3">
+    <p>{{ 'page.home.checkout-catalogue'|trans|replace({'%catalogUrl%': path('catalogue')})|raw }}</p>
+</div>
+{% endblock %}

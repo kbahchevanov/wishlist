@@ -1,0 +1,26 @@
+general:
+  pagination:
+    previous-page: Previous
+    next-page: Next
+page:
+  home:
+    title: Welcome to Wish List Task project!
+    checkout-catalogue: Check out the <a href="%catalogUrl%">Catalogue</a>
+  catalogue:
+    title: Project Catalogue
+    heading: PHP libraries
+    labels:
+      search: Find a library
+      filter-license: Filter by license
+      filter-platform: Filter by platform
+    no-results: Sorry, no results returned for this criteria!
+    modal-success: Project was successfully added to your <a href="%wishlistUrl%">Wishlist</a>!
+    more-info: More info
+    buttons:
+      add-to-wishlist: Add to wishlist
+  wishlist:
+    title: Wish list
+    no-results: There are no items in your wishlist. Please go to the <a href="%catalogUrl%" title="Catalogue">Catalogue</a>
+    modal-success: Project was successfully removed from your wishlist!
+    buttons:
+      remove-from-wishlist: Remove from wishlist
