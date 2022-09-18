@@ -7,10 +7,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class PlatformRepository
 {
-    /**
-     * @var ApiClient
-     */
-    private $apiClient;
+    private ApiClient $apiClient;
 
     public function __construct(ApiClient $apiClient)
     {

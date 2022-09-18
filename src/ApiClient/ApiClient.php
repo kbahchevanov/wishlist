@@ -9,15 +9,8 @@ class ApiClient
 {
     public const METHOD_GET = 'GET';
 
-    /**
-     * @var HttpClientInterface
-     */
-    private $httpClient;
-
-    /**
-     * @var string
-     */
-    private $apiKey;
+    private HttpClientInterface $httpClient;
+    private string $apiKey;
 
     public function __construct(HttpClientInterface $defaultHttpClient, string $apiKey)
     {
@@ -25,9 +18,6 @@ class ApiClient
         $this->apiKey     = $apiKey;
     }
 
-    /**
-     * @param mixed[]|null $parameters
-     */
     public function get(string $path, ?array $parameters): ResponseInterface
     {
         $parameters = \array_merge($parameters, ['api_key' => $this->apiKey]);
@@ -35,10 +25,6 @@ class ApiClient
         return $this->request(self::METHOD_GET, $path, $parameters);
     }
 
-    /**
-     * @param mixed[]|null $parameters
-     * @param mixed[] $customOptions
-     */
     private function request(
         string $method,
         string $path,
@@ -52,9 +38,6 @@ class ApiClient
         );
     }
 
-    /**
-     * @param mixed[]|null $parameters
-     */
     private function buildQuery(?array $parameters): string
     {
         if (empty($parameters)) {

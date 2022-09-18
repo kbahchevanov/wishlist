@@ -16,15 +16,8 @@ class CatalogueController extends AbstractController
     public const DEFAULT_SEARCH_LANGUAGE = 'php';
     public const DEFAULT_SEARCH_SORT     = 'latest_release_published_at';
 
-    /**
-     * @var array
-     */
-    private $wishListItems;
-
-    /**
-     * @var array
-     */
-    private $criteria;
+    private array $wishListItems;
+    private array $criteria;
 
     /**
      * @Route("/catalogue", name="catalogue")
