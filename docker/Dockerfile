@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
 WORKDIR /var/www/html
 COPY ./ /var/www/html
 COPY entry.sh /entry.sh
